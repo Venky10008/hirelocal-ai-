@@ -59,9 +59,10 @@ export const analyzeProblem = createServerFn({ method: "POST" })
 
       return mapGeminiToAnalysisResult(raw);
     } catch (err) {
-      console.error("[analyzeProblem]", err);
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("[analyzeProblem]", msg);
       if (isOfflineError(err)) throw new Error("No internet connection. Please try again.");
-      throw new Error("AI analysis unavailable. Please try again.");
+      throw new Error(msg || "AI analysis unavailable. Please try again.");
     }
   });
 
@@ -96,9 +97,10 @@ export const extractWorkerProfile = createServerFn({ method: "POST" })
       const raw = await extractWorkerWithGemini(data.transcript);
       return buildWorkerDraft(raw);
     } catch (err) {
-      console.error("[extractWorkerProfile]", err);
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("[extractWorkerProfile]", msg);
       if (isOfflineError(err)) throw new Error("No internet connection. Please try again.");
-      throw new Error("AI analysis unavailable. Please try again.");
+      throw new Error(msg || "AI analysis unavailable. Please try again.");
     }
   });
 
