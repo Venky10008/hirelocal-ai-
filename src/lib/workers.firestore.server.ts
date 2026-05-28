@@ -33,7 +33,7 @@ function toUiWorker(id: string, data: FirestoreWorker): Worker {
     skill: data.skill,
     skillSlug: categoryToSkillSlug(data.skill),
     area: data.area,
-    city: "Hyderabad",
+    city: data.area,
     rating: data.rating ?? 0,
     experienceYears: Number(data.experience) || 0,
     price: data.price || "Contact for price",

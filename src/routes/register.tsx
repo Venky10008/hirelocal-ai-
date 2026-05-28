@@ -35,7 +35,7 @@ function RegisterPage() {
     {
       role: "assistant",
       content:
-        "Hello! I will create your profile in 2 minutes. Just tell me:\n• Your name\n• Your skill (electrician, plumber etc.)\n• Your area in Hyderabad\n• Years of experience\n• Your phone number\n\nYou can type in English, Hindi, or Telugu!",
+        "Hello! I will create your profile in 2 minutes. Just tell me:\n• Your name\n• Your skill (electrician, plumber etc.)\n• Your area/city\n• Years of experience\n• Your phone number\n\nYou can type in English, Hindi, or Telugu!",
     },
   ]);
   const [input, setInput] = useState("");

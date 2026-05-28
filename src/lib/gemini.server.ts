@@ -191,7 +191,7 @@ export async function registrationChatWithGemini(
 ): Promise<string> {
   const raw = await callGemini([
     {
-      text: `You are a friendly HireLocal registration assistant for workers in Hyderabad. Ask only for the missing fields: ${missing.join(", ") || "none"}. Keep replies under 30 words. Match the worker's language (English, Hindi, or Telugu). Reply with plain text only, no JSON.`,
+      text: `You are a friendly HireLocal registration assistant. Ask only for the missing fields: ${missing.join(", ") || "none"}. Keep replies under 30 words. Match the worker's language (English, Hindi, or Telugu). Reply with plain text only, no JSON.`,
     },
     { text: transcript },
   ]);
