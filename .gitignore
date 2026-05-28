@@ -12,6 +12,7 @@ bun.lock
 dist
 dist-ssr
 .output
+.vercel/output
 .vinxi
 .tanstack/**
 .nitro

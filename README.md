@@ -42,10 +42,19 @@ See [.env.example](.env.example) for the full list.
 - Google Gemini 1.5 Flash (analysis)
 - Firebase Firestore (workers)
 
+## Deploy on Vercel
+
+This app uses **TanStack Start + Nitro** (Vercel preset). Without Nitro, Vercel shows `404: NOT_FOUND`.
+
+1. Import repo [hirelocal-ai](https://github.com/Venky10008/hirelocal-ai) on Vercel.
+2. **Do not** set a custom Output Directory — Nitro writes `.vercel/output` automatically.
+3. In Vercel → **Settings → Environment Variables**, add every variable from `.env.example` (Production + Preview).
+4. Redeploy.
+
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server |
-| `npm run build` | Production build |
+| `npm run build` | Production build (generates `.vercel/output` for Vercel) |
 | `npm run seed:workers` | Add demo workers to Firestore |
