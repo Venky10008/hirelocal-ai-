@@ -152,8 +152,7 @@ function AnalyzePage() {
             key={t.id}
             onClick={() => {
               navigate({ search: { mode: t.id }, replace: true });
-              setResult(null);
-              setImageDataUrl(null);
+              if (t.id === "text") setImageDataUrl(null);
             }}
             className={cn(
               "inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-all duration-200",
@@ -165,55 +164,55 @@ function AnalyzePage() {
         ))}
       </div>
 
-      {mode === "text" ? (
-        <div className="rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
-          <div ref={scrollRef} className="max-h-[420px] min-h-[280px] space-y-4 overflow-y-auto p-5">
-            {messages.map((m, i) => (
-              <ChatBubble key={i} role={m.role}>
-                {m.image && (
-                  <img src={m.image} alt="user upload" className="mb-2 max-h-48 w-auto rounded-lg" />
-                )}
-                <span className="whitespace-pre-wrap">{m.content}</span>
-              </ChatBubble>
-            ))}
-            {loading && (
-              <ChatBubble role="assistant">
-                <TypingDots />
-              </ChatBubble>
-            )}
-          </div>
+      <div className="rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+        {mode === "photo" && (
+          <PhotoMode
+            imageDataUrl={imageDataUrl}
+            setImageDataUrl={setImageDataUrl}
+            loading={loading}
+            onAnalyze={() => imageDataUrl && handleSubmit("", imageDataUrl)}
+            onFile={onFile}
+          />
+        )}
 
-          <form
-            className="flex items-center gap-2 border-t border-border p-3"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!loading) handleSubmit(input.trim());
-            }}
-          >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={awaitingCity ? "Type your city name…" : "Describe your home problem…"}
-              className="flex-1 rounded-full border border-input bg-background px-4 py-2.5 text-sm outline-none transition-colors focus:border-accent"
-            />
-            <button
-              type="submit"
-              disabled={loading || !input.trim()}
-              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-accent px-5 text-sm font-semibold text-accent-foreground transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              <Send className="h-4 w-4" /> Send
-            </button>
-          </form>
+        <div ref={scrollRef} className="max-h-[420px] min-h-[280px] space-y-4 overflow-y-auto p-5">
+          {messages.map((m, i) => (
+            <ChatBubble key={i} role={m.role}>
+              {m.image && (
+                <img src={m.image} alt="user upload" className="mb-2 max-h-48 w-auto rounded-lg" />
+              )}
+              <span className="whitespace-pre-wrap">{m.content}</span>
+            </ChatBubble>
+          ))}
+          {loading && (
+            <ChatBubble role="assistant">
+              <TypingDots />
+            </ChatBubble>
+          )}
         </div>
-      ) : (
-        <PhotoMode
-          imageDataUrl={imageDataUrl}
-          setImageDataUrl={setImageDataUrl}
-          loading={loading}
-          onAnalyze={() => imageDataUrl && handleSubmit("", imageDataUrl)}
-          onFile={onFile}
-        />
-      )}
+
+        <form
+          className="flex items-center gap-2 border-t border-border p-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!loading) handleSubmit(input.trim());
+          }}
+        >
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={awaitingCity ? "Type your city name…" : "Describe your home problem…"}
+            className="flex-1 rounded-full border border-input bg-background px-4 py-2.5 text-sm outline-none transition-colors focus:border-accent"
+          />
+          <button
+            type="submit"
+            disabled={loading || !input.trim()}
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-accent px-5 text-sm font-semibold text-accent-foreground transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Send className="h-4 w-4" /> Send
+          </button>
+        </form>
+      </div>
 
       {result && result.severity !== "greeting" && !awaitingCity && (
         <section className="mt-8">
