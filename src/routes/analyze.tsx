@@ -58,6 +58,14 @@ function AnalyzePage() {
     setLoading(true);
     try {
       const res = await analyze({ data: { text: text || undefined, imageDataUrl: image } });
+      if (res.severity === "greeting") {
+        setResult(null);
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: res.problemName },
+        ]);
+        return;
+      }
       setResult(res);
       if (res.severity === "diy") {
         setMessages((m) => [
@@ -207,7 +215,7 @@ function AnalyzePage() {
         />
       )}
 
-      {result && !awaitingCity && (
+      {result && result.severity !== "greeting" && !awaitingCity && (
         <section className="mt-8">
           {result.severity === "diy" ? (
             <DiyResultCard result={result} city={city} />

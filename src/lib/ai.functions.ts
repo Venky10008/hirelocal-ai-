@@ -8,7 +8,7 @@ import {
 } from "@/lib/gemini.server";
 
 export type AnalysisResult = {
-  severity: "diy" | "professional";
+  severity: "diy" | "professional" | "greeting";
   problemName: string;
   reason: string;
   workerType: string;
@@ -55,6 +55,20 @@ export const analyzeProblem = createServerFn({ method: "POST" })
         raw = await analyzeTextWithGemini(data.text.trim());
       } else {
         throw new Error("Provide text or an image.");
+      }
+
+      if (raw.problemType === "greeting") {
+        return {
+          severity: "greeting",
+          problemName: raw.greeting || "Hi! Describe your home problem in any language — English, Hindi, or Telugu.",
+          reason: "",
+          workerType: "",
+          diySteps: [],
+          items: [],
+          timeMinutes: 0,
+          costMin: 0,
+          costMax: 0,
+        };
       }
 
       return mapGeminiToAnalysisResult(raw);
