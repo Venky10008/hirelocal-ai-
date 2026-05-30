@@ -1,60 +1,82 @@
-# HireLocal AI
+<div align="center">
 
-AI-powered home services app: describe or photograph a problem, get a DIY guide or matched with verified local workers.
+# 🔧 HireLocal AI
 
-## Setup
+### AI-Powered Platform to Find Trusted Local Workers Across India
 
-1. Clone the repository.
-2. Copy environment template:
-   ```bash
-   cp .env.example .env
-   ```
-3. Add your **Gemini** and **Firebase** credentials to `.env` (never commit this file).
-4. Install and run:
-   ```bash
-   npm install
-   npm run dev
-   ```
-5. (Optional) Seed demo workers into Firestore:
-   ```bash
-   npm run seed:workers
-   ```
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-10b981?style=for-the-badge)](https://hirelocal-ai.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-0f172a?style=for-the-badge&logo=github)](https://github.com/Venky10008/hirelocal-ai-)
+[![Built With AI](https://img.shields.io/badge/Built%20With-AI%20Powered-6366f1?style=for-the-badge)](https://hirelocal-ai.vercel.app/)
 
-## Environment variables
+**FlowZint AI Hackathon 2026 Submission**
 
-| Variable | Description |
-|----------|-------------|
-| `GEMINI_API_KEY` | Google Gemini API key (server-only) |
-| `FIREBASE_*` | Firebase project config (server-only) |
+[🌐 Live Demo](https://hirelocal-ai.vercel.app/) • [📹 Demo Video](#demo) • [⚙️ Features](#features) • [🛠️ Tech Stack](#tech-stack)
 
-See [.env.example](.env.example) for the full list.
+</div>
 
-## Security (public repository)
+---
 
-- **`.env` is gitignored** — do not remove it from `.gitignore`.
-- If `.env` was ever committed, run: `git rm --cached .env` and rotate all API keys.
-- **Rotate keys** in [Google AI Studio](https://aistudio.google.com/apikey) and [Firebase Console](https://console.firebase.google.com/) before publishing.
-- Restrict Firebase with [Firestore security rules](https://firebase.google.com/docs/firestore/security/get-started) in production.
+## 📌 The Problem
 
-## Tech stack
+Every day across India, millions of people face a common struggle:
 
-- React + TanStack Router / Start
-- Google Gemini 1.5 Flash (analysis)
-- Firebase Firestore (workers)
+> *"My pipe burst at night. I don't know any plumber. I asked neighbors, called 3 numbers — 2 didn't pick up, 1 overcharged me ₹2000 for a ₹200 job."*
 
-## Deploy on Vercel
+On the other side:
 
-This app uses **TanStack Start + Nitro** (Vercel preset). Without Nitro, Vercel shows `404: NOT_FOUND`.
+> *"Raju is an excellent electrician with 10 years of experience — but he has no online presence, no way to reach new customers, and sits idle 3 days a week."*
 
-1. Import repo [hirelocal-ai](https://github.com/Venky10008/hirelocal-ai) on Vercel.
-2. **Do not** set a custom Output Directory — Nitro writes `.vercel/output` automatically.
-3. In Vercel → **Settings → Environment Variables**, add every variable from `.env.example` (Production + Preview).
-4. Redeploy.
+**HireLocal AI solves both sides of this problem.**
 
-## Scripts
+---
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build (generates `.vercel/output` for Vercel) |
-| `npm run seed:workers` | Add demo workers to Firestore |
+## 💡 The Solution
+
+HireLocal AI is an intelligent platform that:
+
+- Understands your home problem through **text or photo**
+- **Analyzes severity** — small problems get instant DIY solutions, big problems get matched workers
+- Connects you with **verified local workers** near you
+- Falls back to **Google Places** when no registered workers are available
+- Lets workers **register in any language** — Hindi, Telugu, English — through a simple AI chat
+
+---
+
+## ✨ Features
+
+### 🤖 Smart AI Problem Analysis
+- Describe your problem in **any Indian language**
+- Upload a **photo** of the issue for visual analysis
+- AI instantly decides: DIY fix or professional needed?
+
+### 🛠️ DIY Solutions for Small Problems
+- Step-by-step fix instructions
+- List of items needed with estimated ₹ cost
+- Time required to fix it yourself
+- "Still want a worker?" option always available
+
+### 👷 Professional Worker Matching
+- Instant worker profiles matched by skill + area
+- **AI-generated cost estimate** before you contact anyone
+- **HireLocal Verified** badge for registered workers
+
+### 🌐 Smart Fallback System
+- Checks Firebase database first for registered workers
+- If less than 3 found → automatically fetches from **Google Places API**
+- Customer always gets results — even on day one
+- Google results clearly marked as **Unverified**
+
+### 📝 AI Worker Registration
+- Workers register through a friendly **AI chat**
+- Type freely in Hindi, Telugu, or English
+- AI extracts and builds profile automatically
+- Zero forms, zero tech knowledge needed
+
+### 🗣️ Multilingual Support
+- Works in English, Hindi, Telugu, Tamil,
+  Kannada, Malayalam, Bengali, Marathi
+- AI responds in the user's own language
+
+---
+
+## 🎯 How It Works
